@@ -4,6 +4,12 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
+{ #category : #'as yet unclassified' }
+Card >> discardInto: aGameEventManager [
+
+	aGameEventManager discard: self.
+]
+
 { #category : #comparing }
 Card >> equals: anotherCard [
 

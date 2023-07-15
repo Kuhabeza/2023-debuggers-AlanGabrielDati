@@ -10,6 +10,11 @@ PermanentCard >> checkPlayedBy: aPlayerCards matches: currentTurnPlayerCards [
 	(aPlayerCards equals: currentTurnPlayerCards) ifFalse: [ Error signal: 'Unable to play permanent card when its not your turn' ]
 ]
 
+{ #category : #'as yet unclassified' }
+PermanentCard >> discardInto: aGameEventManager [
+
+]
+
 { #category : #'playing card' }
 PermanentCard >> playIn: aGameEventManager from: aPlayerCards to: aTargetPlayer [
 

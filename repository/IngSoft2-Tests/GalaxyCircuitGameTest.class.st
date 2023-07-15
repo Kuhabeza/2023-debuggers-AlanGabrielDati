@@ -1191,3 +1191,26 @@ GalaxyCircuitGameTest >> test051AGameWithABoardInLightYearsAndWithOnlyHyperJumpS
 	self assert: ((aGame shipPositions) at: 1) equals: (55/3).
 	self assert: ((aGame shipPositions) at: 2) equals: 14.5.
 ]
+
+{ #category : #tests }
+GalaxyCircuitGameTest >> test052AGameWithOnlyDrawSquaresHasAFiniteAmountOfCardsIfTheDeckIsOutOfCardsThenTheDiscardDeckWillRefillAndReshuffleTheDeckThenDrawACard [
+
+	| aGame amountOfSquares anAmountOfParsecs aCardOwner aTargetShip cards aRepeatCard |
+	
+	amountOfSquares := 30.
+	anAmountOfParsecs := Parsec with: 30.
+	aCardOwner := 'Mafalda'.
+	aTargetShip := 'Mafalda'.
+	aRepeatCard := RepeatCard new.
+	cards := OrderedCollection with: aRepeatCard.
+	7 timesRepeat: [ cards add: aRepeatCard ].
+	aGame := self aGameWith: amountOfSquares of: CardSquare new and: anAmountOfParsecs using: cards.
+	
+	aGame play: aRepeatCard from: aCardOwner to: aTargetShip.
+	aGame playTurn.
+	"A this point the drawing deck should be empty"
+	aGame play: aRepeatCard from: aCardOwner to: aTargetShip.
+	aGame play: aRepeatCard from: aCardOwner to: aTargetShip.
+
+	self assert: ((aGame shipPositions) at: 1) equals: 15.
+]

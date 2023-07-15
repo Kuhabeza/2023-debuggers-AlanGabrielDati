@@ -71,6 +71,12 @@ GameEventManager >> currentTurn [
 	^ turnOrder current.
 ]
 
+{ #category : #'as yet unclassified' }
+GameEventManager >> discard: aCard [
+
+	cardManager addToDiscardDeck: aCard.
+]
+
 { #category : #'adding Cards' }
 GameEventManager >> drawCardTo: aTargetHand [
 
@@ -103,6 +109,7 @@ GameEventManager >> play: aCard from: aCardOwner to: aTargetPlayer [
 	owner := (PlayerCards from: aCardOwner).
 	self checkThat: owner has: aCard.
 	aCard playIn: self from: owner to: aTargetPlayer.
+	aCard discardInto: self.
 	self remove: aCard from: owner.
 	self updateLastCardPlayed: aCard.
 ]
