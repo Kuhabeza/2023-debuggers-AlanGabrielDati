@@ -14,7 +14,7 @@ Deck class >> with: aSetOfCards [
 
 { #category : #'drawing cards' }
 Deck >> draw [
-	^ cards at: (cards size atRandom).
+	^ cards removeFirst.
 ]
 
 { #category : #initialization }

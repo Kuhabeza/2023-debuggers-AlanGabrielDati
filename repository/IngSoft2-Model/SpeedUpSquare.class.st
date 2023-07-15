@@ -1,6 +1,6 @@
 Class {
 	#name : #SpeedUpSquare,
-	#superclass : #Object,
+	#superclass : #Square,
 	#category : #'IngSoft2-Model'
 }
 

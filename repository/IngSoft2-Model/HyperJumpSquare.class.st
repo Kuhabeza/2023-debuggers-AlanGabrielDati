@@ -1,6 +1,6 @@
 Class {
 	#name : #HyperJumpSquare,
-	#superclass : #Object,
+	#superclass : #Square,
 	#instVars : [
 		'parsecSteps'
 	],

@@ -1,6 +1,6 @@
 Class {
 	#name : #MoonwalkSquare,
-	#superclass : #Object,
+	#superclass : #Square,
 	#instVars : [
 		'steps'
 	],
