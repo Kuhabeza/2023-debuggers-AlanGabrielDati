@@ -15,3 +15,15 @@ Card >> equals: anotherCard [
 
 	^ anotherCard isKindOf: self class.
 ]
+
+{ #category : #'as yet unclassified' }
+Card >> isAbleToBeDiscarded [
+
+	
+]
+
+{ #category : #'as yet unclassified' }
+Card >> isUnableToBeDiscarded [
+
+	
+]

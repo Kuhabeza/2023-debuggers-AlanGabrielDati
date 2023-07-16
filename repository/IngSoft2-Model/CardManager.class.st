@@ -57,6 +57,12 @@ CardManager >> checkCancel: aPermanentCardToCancel to: aTargetPlayerCards [
 		Error signal: 'Unable to cancel the permanent card because there is no such card in effect' ]
 ]
 
+{ #category : #accessing }
+CardManager >> discardDeckSize [
+
+	^ discardDeck size.
+]
+
 { #category : #'adding Cards' }
 CardManager >> drawCardTo: aTargetPlayerCards [
 
@@ -73,7 +79,7 @@ CardManager >> initializeWith: somePlayersNames using: aDeck [
 	
 	drawDeck := aDeck.
 	discardDeck := Deck with: OrderedCollection new.
-	lastCardPlayed := NonPlayableCard new.
+	lastCardPlayed := OrderedCollection with: NonPlayableCard new.
 	playerCards := OrderedCollection new.
 	playerCards := somePlayersNames collect: [ :aPlayerName | 
 		               | aPlayerCards |
@@ -85,7 +91,7 @@ CardManager >> initializeWith: somePlayersNames using: aDeck [
 { #category : #accessing }
 CardManager >> lastCardPlayed [
 	
-	^ lastCardPlayed.
+	^ lastCardPlayed removeLast.
 ]
 
 { #category : #'removing cards' }
@@ -100,24 +106,26 @@ CardManager >> remove: aCard from: aTargetPlayerCards [
 { #category : #'removing cards' }
 CardManager >> remove: aPermanentCardToCancel to: aTargetPlayerCards [
 	
-	| targetCards |
+	| targetCards removedPermanentCard |
 	
 	targetCards := playerCards detect: [:aPlayerCards | aPlayerCards equals: aTargetPlayerCards].
-	targetCards removePermanent: aPermanentCardToCancel.
-	self addToDiscardDeck: aPermanentCardToCancel.
+	removedPermanentCard := targetCards removePermanent: aPermanentCardToCancel.
+	^ removedPermanentCard.
 ]
 
 { #category : #'as yet unclassified' }
 CardManager >> shuffleDiscardDeckIntoDrawDeck [
-
+	
 	drawDeck := discardDeck shuffle.
 	discardDeck := Deck with: OrderedCollection new.
 ]
 
 { #category : #'card effects' }
 CardManager >> updateLastCardPlayed: aCard [
-			
-	lastCardPlayed := aCard.
+	
+	| lastCard |
+	lastCard := aCard copy.		
+	lastCardPlayed add: lastCard isUnableToBeDiscarded.
 ]
 
 { #category : #'card effects' }

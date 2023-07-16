@@ -49,8 +49,11 @@ GameEventManager >> applyMoonwalk: steps to: aTargetShip [
 { #category : #'applying effects' }
 GameEventManager >> cancel: aTargetCard to: aTargetPlayerCards [
 
+	| removedPermanentCard |
 	cardManager checkCancel: aTargetCard to: aTargetPlayerCards.	
-	cardManager remove: aTargetCard to: aTargetPlayerCards.
+	removedPermanentCard := cardManager remove: aTargetCard to: aTargetPlayerCards.
+	removedPermanentCard discardInto: self.
+	 
 ]
 
 { #category : #validation }
@@ -75,6 +78,12 @@ GameEventManager >> currentTurn [
 GameEventManager >> discard: aCard [
 
 	cardManager addToDiscardDeck: aCard.
+]
+
+{ #category : #accessing }
+GameEventManager >> discardDeckSize [
+
+	^ cardManager discardDeckSize
 ]
 
 { #category : #'adding Cards' }
@@ -106,10 +115,10 @@ GameEventManager >> play: aCard from: aCardOwner to: aTargetPlayer [
 	
 	| owner |
 	
+	aCard isAbleToBeDiscarded.
 	owner := (PlayerCards from: aCardOwner).
 	self checkThat: owner has: aCard.
 	aCard playIn: self from: owner to: aTargetPlayer.
-	aCard discardInto: self.
 	self remove: aCard from: owner.
 	self updateLastCardPlayed: aCard.
 ]

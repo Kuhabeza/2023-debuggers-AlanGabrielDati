@@ -1214,3 +1214,53 @@ GalaxyCircuitGameTest >> test052AGameWithOnlyDrawSquaresHasAFiniteAmountOfCardsI
 
 	self assert: ((aGame shipPositions) at: 1) equals: 15.
 ]
+
+{ #category : #tests }
+GalaxyCircuitGameTest >> test053AGameWithOnlyDrawSquaresHasAFiniteAmountOfCardTheDiscardDeckMustHaveTheSameAmountOfCardsRemovedFromPlay [
+
+	| aGame amountOfSquares anAmountOfParsecs aCardOwner aTargetShip cards aSpeedCard aCancellationCard aTargetPlayedPermanent aRedoCard anotherCardOwner |
+	
+	amountOfSquares := 30.
+	anAmountOfParsecs := Parsec with: 30.
+	aCardOwner := 'Mafalda'.
+	anotherCardOwner := 'Juan'.
+	aTargetShip := 'Mafalda'.
+	aSpeedCard := SpeedCard new.
+	aCancellationCard := CancellationCard new.
+	aRedoCard := RedoCard new.
+	aTargetPlayedPermanent := PlayedPermanent with: aSpeedCard to: aTargetShip.
+	cards := OrderedCollection with: aSpeedCard with: aRedoCard with: aCancellationCard with: aCancellationCard with: aSpeedCard with: aSpeedCard.
+	aGame := self aGameWith: amountOfSquares of: CardSquare new and: anAmountOfParsecs using: cards.
+	
+	aGame play: aSpeedCard from: aCardOwner to: aTargetShip.
+	aGame play: aRedoCard from: aCardOwner to: aTargetShip.
+	aGame play: aCancellationCard from: anotherCardOwner to: aTargetPlayedPermanent.
+	aGame play: aCancellationCard from: anotherCardOwner to: aTargetPlayedPermanent.
+
+	self assert: (aGame discardDeckSize) equals: 4.
+]
+
+{ #category : #tests }
+GalaxyCircuitGameTest >> test054AGameWithOnlyDrawSquaresHasAFiniteAmountOfCardsCannotDrawCardsWhenBothTheDrawAndDiscardDeckAreEmpty [
+
+	| aGame amountOfSquares anAmountOfParsecs aCardOwner aTargetShip cards aSpeedCard |
+	amountOfSquares := 30.
+	anAmountOfParsecs := Parsec with: 30.
+	aCardOwner := 'Mafalda'.
+	aTargetShip := 'Mafalda'.
+	aSpeedCard := SpeedCard new.
+	cards := OrderedCollection with: aSpeedCard.
+	5 timesRepeat: [ cards add: aSpeedCard ].
+	aGame := self aGameWith: amountOfSquares of: CardSquare new and: anAmountOfParsecs using: cards.
+	
+	aGame play: aSpeedCard from: aCardOwner to: aTargetShip.
+	aGame play: aSpeedCard from: aCardOwner to: aTargetShip.
+	aGame playTurn.
+	aGame playTurn.
+	aGame playTurn.
+
+	self
+		should: [ aGame play: SpeedCard new from: aCardOwner to: aTargetShip. ]
+		raise: Error
+		withMessage: 'Unable to play card when the player does not own the card'
+]

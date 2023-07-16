@@ -8,4 +8,5 @@ Class {
 RepeatCard >> playIn: aGameEventManager from: aPlayerCards to: aTargetPlayer [
 	
 	aGameEventManager repeatLastSquareLandedTo: (Ship with: aTargetPlayer).
+	self discardInto: aGameEventManager.
 ]

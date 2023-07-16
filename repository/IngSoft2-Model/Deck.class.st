@@ -34,8 +34,20 @@ Deck >> isEmpty [
 	^ cards isEmpty.
 ]
 
+{ #category : #removing }
+Deck >> remove: aCard [
+
+	cards remove: aCard ifAbsent: [ ^nil ].
+]
+
 { #category : #shuffling }
 Deck >> shuffle [
 
 	cards := cards shuffle.
+]
+
+{ #category : #accessing }
+Deck >> size [
+
+	^ cards size.
 ]

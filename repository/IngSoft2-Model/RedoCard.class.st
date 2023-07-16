@@ -8,5 +8,6 @@ Class {
 RedoCard >> playIn: aGameEventManager from: aPlayerCards to: aTargetPlayer [
 	
 	aGameEventManager redoLastCardPlayedFrom: aPlayerCards to: aTargetPlayer.
+	self discardInto: aGameEventManager.
 	
 ]

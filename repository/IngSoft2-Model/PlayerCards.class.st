@@ -75,6 +75,7 @@ PlayerCards >> removePermanent: aPermanentCardToCancel [
 	
 	aCardToRemove := permanents detect: [ :aCard | aCard equals: aPermanentCardToCancel ].
 	permanents remove: aCardToRemove.
+	^aCardToRemove.
 ]
 
 { #category : #using }

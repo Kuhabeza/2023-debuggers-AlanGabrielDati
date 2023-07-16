@@ -36,6 +36,12 @@ GalaxyCircuitGame >> currentTurn [
 	^ gameEventManager currentTurn.
 ]
 
+{ #category : #accessing }
+GalaxyCircuitGame >> discardDeckSize [
+
+	^ gameEventManager discardDeckSize
+]
+
 { #category : #initialization }
 GalaxyCircuitGame >> initializeWith: somePlayersNames and: aBoard and: anAmountOfLaps uses: aDiceCup uses: aDeck [
 
