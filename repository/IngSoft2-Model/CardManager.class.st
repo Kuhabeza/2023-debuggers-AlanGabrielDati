@@ -75,11 +75,10 @@ CardManager >> discardDeckSize [
 CardManager >> drawCardTo: aTargetPlayerCards [
 
 	| targetCards |
-	drawDeck isEmpty ifTrue: [ self shuffleDiscardDeckIntoDrawDeck ].
-	drawDeck isEmpty ifFalse: [ 
-		targetCards := playerCards detect: [ :aPlayerCards | 
-			               aPlayerCards equals: aTargetPlayerCards ].
-		targetCards addCard: drawDeck draw ]
+	drawDeck isEmpty ifTrue: [ self shuffleDiscardDeckIntoDrawDeck ] ifFalse: [ 
+	targetCards := playerCards detect: [ :aPlayerCards | 
+		               aPlayerCards equals: aTargetPlayerCards ].
+	targetCards addCard: drawDeck draw].
 ]
 
 { #category : #initialization }
