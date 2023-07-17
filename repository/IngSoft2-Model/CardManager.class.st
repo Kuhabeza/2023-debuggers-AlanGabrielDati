@@ -49,6 +49,14 @@ CardManager >> addToDiscardDeck: aCard [
 	discardDeck add: aCard.
 ]
 
+{ #category : #'as yet unclassified' }
+CardManager >> amountOfCardsFrom: aTargetPlayer [
+
+	| targetCards |
+	targetCards := playerCards detect: [:aPlayerCards | aPlayerCards equals: aTargetPlayer].
+	^ targetCards amountOfCardsInHand.
+]
+
 { #category : #'card playability' }
 CardManager >> checkCancel: aPermanentCardToCancel to: aTargetPlayerCards [
 

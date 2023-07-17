@@ -27,6 +27,12 @@ PlayerCards >> addToPermanentPile: aPermanentCard [
 	permanents add: aPermanentCard.
 ]
 
+{ #category : #'as yet unclassified' }
+PlayerCards >> amountOfCardsInHand [
+
+	^ hand size.
+]
+
 { #category : #comparing }
 PlayerCards >> equals: anotherPlayerCards [
 

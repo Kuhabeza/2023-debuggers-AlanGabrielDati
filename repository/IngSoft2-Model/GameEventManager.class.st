@@ -168,6 +168,14 @@ GameEventManager >> shipRanking [
 	^ movementManager shipRanking.
 ]
 
+{ #category : #'as yet unclassified' }
+GameEventManager >> sprintTo: aTargetPlayer [
+
+	| steps |
+	steps := cardManager amountOfCardsFrom: aTargetPlayer.
+	movementManager updatePosition: steps to: aTargetPlayer.
+]
+
 { #category : #playing }
 GameEventManager >> updateLastCardPlayed: aCard [
 

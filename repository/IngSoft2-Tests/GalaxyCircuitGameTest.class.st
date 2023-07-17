@@ -1264,3 +1264,20 @@ GalaxyCircuitGameTest >> test054AGameWithOnlyDrawSquaresHasAFiniteAmountOfCardsC
 		raise: Error
 		withMessage: 'Unable to play card when the player does not own the card'
 ]
+
+{ #category : #tests }
+GalaxyCircuitGameTest >> test055AGameWithOnlySprintSquaresMovesShipsByTheSameAmountOfCardsItsPlayersHasInHand [
+
+	| aGame amountOfSquares anAmountOfParsecs aSpeedCard cards |
+	
+	amountOfSquares := 30.
+	anAmountOfParsecs := Parsec with: 30.
+	aSpeedCard := SpeedCard new.
+	cards := OrderedCollection with: aSpeedCard.
+	10 timesRepeat: [ cards add: aSpeedCard ].
+	aGame := self aGameWith: amountOfSquares of: SprintSquare new and: anAmountOfParsecs using: cards.
+	
+	aGame playTurn.
+
+	self assert: ((aGame shipPositions) at: 1) equals: 17.
+]
