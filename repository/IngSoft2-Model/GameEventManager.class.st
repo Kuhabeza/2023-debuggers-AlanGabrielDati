@@ -111,14 +111,14 @@ GameEventManager >> moveCurrentTurnPlayer: aDiceResult [
 ]
 
 { #category : #playing }
-GameEventManager >> play: aCard from: aCardOwner to: aTargetPlayer [ 
+GameEventManager >> play: aCard from: aCardOwner to: aTarget [ 
 	
 	| owner |
 	
 	aCard isAbleToBeDiscarded.
 	owner := (PlayerCards from: aCardOwner).
 	self checkThat: owner has: aCard.
-	aCard playIn: self from: owner to: aTargetPlayer.
+	aCard playIn: self from: owner to: aTarget.
 	self remove: aCard from: owner.
 	self updateLastCardPlayed: aCard.
 ]
