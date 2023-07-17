@@ -74,7 +74,7 @@ GameEventManager >> currentTurn [
 	^ turnOrder current.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 GameEventManager >> discard: aCard [
 
 	cardManager addToDiscardDeck: aCard.
@@ -168,7 +168,7 @@ GameEventManager >> shipRanking [
 	^ movementManager shipRanking.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'applying effects' }
 GameEventManager >> sprintTo: aTargetPlayer [
 
 	| steps |

@@ -13,7 +13,7 @@ PermanentCard >> checkPlayedBy: aPlayerCards matches: currentTurnPlayerCards [
 	(aPlayerCards equals: currentTurnPlayerCards) ifFalse: [ Error signal: 'Unable to play permanent card when its not your turn' ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 PermanentCard >> discardInto: aGameEventManager [
 
 	(cardIsAbleToBeDiscarded) ifTrue: [aGameEventManager discard: self].
@@ -25,13 +25,13 @@ PermanentCard >> initialize [
 	cardIsAbleToBeDiscarded := true.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 PermanentCard >> isAbleToBeDiscarded [
 
 	cardIsAbleToBeDiscarded := true.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 PermanentCard >> isUnableToBeDiscarded [
 
 	cardIsAbleToBeDiscarded := false.

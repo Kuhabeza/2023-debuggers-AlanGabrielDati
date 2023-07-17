@@ -1208,7 +1208,6 @@ GalaxyCircuitGameTest >> test052AGameWithOnlyDrawSquaresHasAFiniteAmountOfCardsI
 	
 	aGame play: aRepeatCard from: aCardOwner to: aTargetShip.
 	aGame playTurn.
-	"A this point the drawing deck should be empty"
 	aGame play: aRepeatCard from: aCardOwner to: aTargetShip.
 	aGame play: aRepeatCard from: aCardOwner to: aTargetShip.
 

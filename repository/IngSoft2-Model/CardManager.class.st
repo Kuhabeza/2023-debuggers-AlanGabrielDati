@@ -49,7 +49,7 @@ CardManager >> addToDiscardDeck: aCard [
 	discardDeck add: aCard.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 CardManager >> amountOfCardsFrom: aTargetPlayer [
 
 	| targetCards |
@@ -121,7 +121,7 @@ CardManager >> remove: aPermanentCardToCancel to: aTargetPlayerCards [
 	^ removedPermanentCard.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'shuffling deck' }
 CardManager >> shuffleDiscardDeckIntoDrawDeck [
 	
 	drawDeck := discardDeck shuffle.

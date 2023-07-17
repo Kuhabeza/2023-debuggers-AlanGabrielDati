@@ -4,7 +4,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 Card >> discardInto: aGameEventManager [
 
 	aGameEventManager discard: self.
@@ -16,13 +16,13 @@ Card >> equals: anotherCard [
 	^ anotherCard isKindOf: self class.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 Card >> isAbleToBeDiscarded [
 
 	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #discarding }
 Card >> isUnableToBeDiscarded [
 
 	
