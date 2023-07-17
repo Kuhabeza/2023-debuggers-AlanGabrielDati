@@ -27,7 +27,7 @@ PlayerCards >> addToPermanentPile: aPermanentCard [
 	permanents add: aPermanentCard.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 PlayerCards >> amountOfCardsInHand [
 
 	^ hand size.
