@@ -27,6 +27,12 @@ PlayerCards >> addToPermanentPile: aPermanentCard [
 	permanents add: aPermanentCard.
 ]
 
+{ #category : #'as yet unclassified' }
+PlayerCards >> amountOfCardsInHand [
+
+	^ hand size.
+]
+
 { #category : #comparing }
 PlayerCards >> equals: anotherPlayerCards [
 
@@ -75,6 +81,7 @@ PlayerCards >> removePermanent: aPermanentCardToCancel [
 	
 	aCardToRemove := permanents detect: [ :aCard | aCard equals: aPermanentCardToCancel ].
 	permanents remove: aCardToRemove.
+	^aCardToRemove.
 ]
 
 { #category : #using }

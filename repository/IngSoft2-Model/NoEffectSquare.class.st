@@ -1,6 +1,6 @@
 Class {
 	#name : #NoEffectSquare,
-	#superclass : #Object,
+	#superclass : #Square,
 	#category : #'IngSoft2-Model'
 }
 

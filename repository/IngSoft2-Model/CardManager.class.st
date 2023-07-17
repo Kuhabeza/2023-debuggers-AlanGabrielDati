@@ -2,9 +2,10 @@ Class {
 	#name : #CardManager,
 	#superclass : #Object,
 	#instVars : [
-		'deck',
 		'lastCardPlayed',
-		'playerCards'
+		'playerCards',
+		'drawDeck',
+		'discardDeck'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -42,6 +43,20 @@ CardManager >> addToAllPermanentPiles: aPermanentCard [
 	playerCards do: [ :aPlayerCards | aPlayerCards addToPermanentPile: aPermanentCard ].
 ]
 
+{ #category : #adding }
+CardManager >> addToDiscardDeck: aCard [
+
+	discardDeck add: aCard.
+]
+
+{ #category : #accessing }
+CardManager >> amountOfCardsFrom: aTargetPlayer [
+
+	| targetCards |
+	targetCards := playerCards detect: [:aPlayerCards | aPlayerCards equals: aTargetPlayer].
+	^ targetCards amountOfCardsInHand.
+]
+
 { #category : #'card playability' }
 CardManager >> checkCancel: aPermanentCardToCancel to: aTargetPlayerCards [
 
@@ -50,32 +65,42 @@ CardManager >> checkCancel: aPermanentCardToCancel to: aTargetPlayerCards [
 		Error signal: 'Unable to cancel the permanent card because there is no such card in effect' ]
 ]
 
+{ #category : #accessing }
+CardManager >> discardDeckSize [
+
+	^ discardDeck size.
+]
+
 { #category : #'adding Cards' }
 CardManager >> drawCardTo: aTargetPlayerCards [
-	
+
 	| targetCards |
-	
-	targetCards := playerCards detect: [:aPlayerCards | aPlayerCards equals: aTargetPlayerCards].
-	targetCards addCard: deck draw.
+	drawDeck isEmpty
+		ifTrue: [ self shuffleDiscardDeckIntoDrawDeck ]
+		ifFalse: [ 
+			targetCards := playerCards detect: [ :aPlayerCards | 
+				               aPlayerCards equals: aTargetPlayerCards ].
+			targetCards addCard: drawDeck draw ]
 ]
 
 { #category : #initialization }
 CardManager >> initializeWith: somePlayersNames using: aDeck [
 	
-	deck := aDeck.
-	lastCardPlayed := NonPlayableCard new.
+	drawDeck := aDeck.
+	discardDeck := Deck with: OrderedCollection new.
+	lastCardPlayed := OrderedCollection with: NonPlayableCard new.
 	playerCards := OrderedCollection new.
 	playerCards := somePlayersNames collect: [ :aPlayerName | 
 		               | aPlayerCards |
 		               aPlayerCards := PlayerCards from: aPlayerName.
-		               aPlayerCards addCard: deck draw.
-		               aPlayerCards addCard: deck draw ].
+		               aPlayerCards addCard: drawDeck draw.
+		               aPlayerCards addCard: drawDeck draw ].
 ]
 
 { #category : #accessing }
 CardManager >> lastCardPlayed [
 	
-	^ lastCardPlayed.
+	^ lastCardPlayed removeLast.
 ]
 
 { #category : #'removing cards' }
@@ -90,16 +115,26 @@ CardManager >> remove: aCard from: aTargetPlayerCards [
 { #category : #'removing cards' }
 CardManager >> remove: aPermanentCardToCancel to: aTargetPlayerCards [
 	
-	| targetCards |
+	| targetCards removedPermanentCard |
 	
 	targetCards := playerCards detect: [:aPlayerCards | aPlayerCards equals: aTargetPlayerCards].
-	targetCards removePermanent: aPermanentCardToCancel.
+	removedPermanentCard := targetCards removePermanent: aPermanentCardToCancel.
+	^ removedPermanentCard.
+]
+
+{ #category : #'shuffling deck' }
+CardManager >> shuffleDiscardDeckIntoDrawDeck [
+	
+	drawDeck := discardDeck shuffle.
+	discardDeck := Deck with: OrderedCollection new.
 ]
 
 { #category : #'card effects' }
 CardManager >> updateLastCardPlayed: aCard [
-			
-	lastCardPlayed := aCard.
+	
+	| lastCard |
+	lastCard := aCard copy.		
+	lastCardPlayed add: lastCard isUnableToBeDiscarded.
 ]
 
 { #category : #'card effects' }

@@ -12,13 +12,42 @@ Deck class >> with: aSetOfCards [
 	^ (self new) initializeWith: aSetOfCards.
 ]
 
+{ #category : #adding }
+Deck >> add: aCard [ 
+	cards add: aCard.
+]
+
 { #category : #'drawing cards' }
 Deck >> draw [
-	^ cards at: (cards size atRandom).
+	^ cards removeFirst.
 ]
 
 { #category : #initialization }
 Deck >> initializeWith: aSetOfCards [
 	
 	cards := aSetOfCards.
+]
+
+{ #category : #testing }
+Deck >> isEmpty [
+
+	^ cards isEmpty.
+]
+
+{ #category : #removing }
+Deck >> remove: aCard [
+
+	cards remove: aCard ifAbsent: [ ^nil ].
+]
+
+{ #category : #shuffling }
+Deck >> shuffle [
+
+	cards := cards shuffle.
+]
+
+{ #category : #accessing }
+Deck >> size [
+
+	^ cards size.
 ]

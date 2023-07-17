@@ -12,4 +12,5 @@ CancellationCard >> playIn: aGameEventManager from: aPlayerCards to: aTargetPlay
 	targetCard := aTargetPlayedPermanentCard card.
 	targetPlayerCards := PlayerCards from: aTargetPlayedPermanentCard target.
 	aGameEventManager cancel: targetCard to: targetPlayerCards.
+	self discardInto: aGameEventManager.
 ]
